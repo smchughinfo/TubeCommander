@@ -4,5 +4,5 @@ function getYoutubeVideoId(url) {
 }
 
 module.exports = {
-    getYoutubeVideoId: getYoutubeVideoId
+    GetYoutubeVideoId: getYoutubeVideoId
 }

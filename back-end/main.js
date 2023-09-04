@@ -6,8 +6,8 @@ const eventEmitter = require('events');
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! whats this do?
 
 var rescrape = true;
-rescrape = false;  // <----------- TOGGLE THIS ONE
-rescrape = (!fs.existsSync("cachedVideos.txt") && !fs.existsSync("cachedVideosIDs.txt")) // but it will always rescrape if cached files dont exist
+//rescrape = false;  // <----------- TOGGLE THIS ONE
+rescrape = rescrape || (!fs.existsSync("cachedVideos.txt") && !fs.existsSync("cachedVideosIDs.txt")) // but it will always rescrape if cached files dont exist
 
 var myEmitter = new eventEmitter();
 var window = null;
@@ -20,7 +20,7 @@ if(rescrape) {
 }
 else {
     windowManager.CreateWindow('front-end/index.html', true).then(win => {
-        window = win;
+        window = win;7
         ipc.SetupIPC(myEmitter, window, true);
     });
 }

@@ -37,7 +37,8 @@ function setupYoutubeScraper(win) {
     win.webContents.on('did-finish-load', () => {
         var isYoutubeUrl = win.getURL().indexOf("youtube") !== -1;
         if(isYoutubeUrl) {
-            const customScript = fs.readFileSync("front-end/utilities/scraper.js");
+            const filePath = path.join(__dirname, '../front-end/utilities/scraper.js');
+            const customScript = fs.readFileSync(filePath);
             win.webContents.executeJavaScript(customScript)
         }
     });
