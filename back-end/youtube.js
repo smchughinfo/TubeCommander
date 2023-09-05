@@ -3,7 +3,7 @@ const fs = require("fs")
 
 // Each API may support multiple versions. With this sample, we're getting
 // v3 of the blogger API, and using an API key to authenticate.
-let authKey = fs.readFileSync("c:\\users\\seanm\\desktop\\secrets.json")
+let authKey = fs.readFileSync("C:\\TubeCommander\\secrets.json")
 authKey = JSON.parse(authKey)
 authKey = authKey["google-api-key"];
 
