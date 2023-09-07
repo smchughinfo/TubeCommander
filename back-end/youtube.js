@@ -1,9 +1,10 @@
 const {google} = require('googleapis');
-const fs = require("fs")
+const fs = require("fs");
+const { channel } = require('diagnostics_channel');
 
 // Each API may support multiple versions. With this sample, we're getting
 // v3 of the blogger API, and using an API key to authenticate.
-let authKey = fs.readFileSync("c:\\users\\seanm\\desktop\\secrets.json")
+let authKey = fs.readFileSync("C:\\TubeCommander\\secrets.json")
 authKey = JSON.parse(authKey)
 authKey = authKey["google-api-key"];
 
@@ -62,6 +63,24 @@ async function search(queryParams) {
     return videos;
 }
 
+async function GetChannelInfo(channelIds) {
+    var results = [];
+
+    for(var i = 0;i*50 < channelIds.length; i++) {
+        var chunk = channelIds.slice(i*50, (i+1)*50);
+        var response = await youtube.channels.list({
+            id: chunk.join(","),
+            part: "snippet,contentDetails,statistics",
+            maxResults: 50
+        });
+        response.data.items.forEach(r => {
+            r.snippet.thumbnails = formatThumbnails(r.snippet.thumbnails);
+        })
+        results = results.concat(response.data.items);
+    }
+    
+    return results;
+}
 
 /*
 // https://developers.google.com/youtube/v3/docs/search/list#usage
@@ -115,14 +134,19 @@ async function getVideoDetails(videoIdList) {
         var batchIdList = videoIdList.slice(done, done + 50);
         var response = await youtube.videos.list({
             part: "snippet,contentDetails,statistics",
-
             id: batchIdList.join(",")
         });
-
         results = results.concat(response.data.items);
 
         done += 50;
         if(done >= videoIdList.length) {
+            var channelIds = results.map(r => r.snippet.channelId);
+            var uniqueChannelIds = [...new Set(channelIds)];
+            var channels = await GetChannelInfo(uniqueChannelIds);
+            results.forEach(r => {
+                r.snippet.thumbnails = formatThumbnails(r.snippet.thumbnails);
+                r.channel = channels.find(c => c.id == r.snippet.channelId)
+            });
             break;
         }
     }

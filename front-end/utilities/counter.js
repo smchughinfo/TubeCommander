@@ -16,7 +16,7 @@ function incrementCount(id) {
 }
 
 function getCount(id) {
-    return counts[id].count;
+    return counts.find(c => c.id).count;
 }
 
 export default {

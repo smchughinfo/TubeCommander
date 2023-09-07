@@ -1,18 +1,28 @@
 {
-  "name": "thirteen-channels-of-shit",
+  "name": "TubeCommander",
+  "authors": "TubeCommander MasterMind",
   "version": "1.0.0",
-  "description": "",
+  "description": "TubeCommander!",
   "main": "back-end/main.js",
   "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron-forge start",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@electron-forge/cli": "^6.4.1",
+    "@electron-forge/maker-deb": "^6.4.1",
+    "@electron-forge/maker-rpm": "^6.4.1",
+    "@electron-forge/maker-squirrel": "^6.4.1",
+    "@electron-forge/maker-zip": "^6.4.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^6.4.1",
     "electron": "^26.1.0"
   },
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "electron-tabs": "^1.0.1",
     "google-auth-library": "^9.0.0",
     "googleapis": "^126.0.1"

@@ -7,10 +7,15 @@ contextBridge.exposeInMainWorld('versions', {
   ping: () => ipcRenderer.invoke('ping')
 });
 
+contextBridge.exposeInMainWorld('settings', {
+  update: () => ipcRenderer.invoke("settings-update"),
+});
+
 contextBridge.exposeInMainWorld('youtube', {
   search: queryParams => ipcRenderer.invoke("youtube-search", queryParams),
   scrapeVideos: videos => ipcRenderer.invoke("youtube-save-scraped-videos", videos),
   getSuggestedVideos: () => ipcRenderer.invoke("youtube-get-videos"),
   getVideoDetails: videoIds => ipcRenderer.invoke("youtube-get-video-details", videoIds),
-  getVideoId: videoUrl => ipcRenderer.invoke("youtube-get-video-id", videoUrl)
+  getVideoId: videoUrl => ipcRenderer.invoke("youtube-get-video-id", videoUrl),
+  openVideo: videoId => ipcRenderer.invoke("youtube-open-video", videoId),
 });
