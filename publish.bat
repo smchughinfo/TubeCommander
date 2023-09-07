@@ -18,4 +18,4 @@ if exist "out\make\squirrel.windows\x64\TubeCommander-1.0.0 Setup.exe" (
     gh release delete v1.0.0 -y --cleanup-tag
     move "out\make\squirrel.windows\x64\TubeCommander-1.0.0 Setup.exe" "out\make\squirrel.windows\x64\TubeCommander.exe"
     gh release create v1.0.0 "out\make\squirrel.windows\x64\TubeCommander.exe" --title "TubeCommander Only Release" --notes "This release will always contain the latest code."
-    REM gh repo delete-tag smchughinfo/TubeCommander v1.0.0
+    REM git tag -d v1.0.0
