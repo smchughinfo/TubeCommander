@@ -31,7 +31,6 @@ function allVideosLoaded() {
 function loadVideo(video) {
     var videoThumbnailUrl = video.snippet.thumbnails[video.snippet.thumbnails.length - 1].url;
     var channelThumbnailUrl = video.channel.snippet.thumbnails[0].url;
-    
     var $video = $("<div class='col-3 video-container' style='margin-top:30px;'>\
                         <img video-id='" + video.id + "' class='video-thumbnail' src='" + videoThumbnailUrl + "'>\
                         <div class='col'>\
@@ -40,7 +39,7 @@ function loadVideo(video) {
                         </div>\
                         <div class='col' style='flex-grow:2'>\
                             <div class='col-12'>\
-                                <div>" + video.snippet.title + "</div>\
+                                <div>" + video.count + " - " + video.snippet.title + "</div>\
                                 <div style='width: 100%;max-height: 30px;whitespace:wrap;font-size:10px;font-style:italic;overflow:hidden;'>" + video.snippet.description + "</div>\
                             </div>\
                         </div>\
