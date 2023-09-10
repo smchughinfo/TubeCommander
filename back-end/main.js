@@ -17,7 +17,7 @@ var cachedVideosPath = path.join(__dirname, "cache/cachedVideo.txt");
 var cachedVideoIdsPath = path.join(__dirname, "cache/cachedVideosIDs.txt");
 
 var rescrape = true;
-rescrape = false;  // <----------- TOGGLE THIS ONE
+//rescrape = false;  // <----------- TOGGLE THIS ONE
 rescrape = rescrape || (!fs.existsSync(cachedVideosPath) && !fs.existsSync(cachedVideoIdsPath)) // but it will always rescrape if cached files dont exist
 var myEmitter = new eventEmitter();
 var window = null;
