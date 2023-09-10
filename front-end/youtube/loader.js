@@ -11,7 +11,11 @@ function load(videos) {
 
 function orderVideoList() {
     videoList = videoList.sort((a, b) => {
-        return counter.GetCount(a.id) - counter.GetCount(b.id); // ascending
+        var viewCountSort = counter.GetCount(a.id) - counter.GetCount(b.id); // ascending
+        if(viewCountSort !== 0) {
+            return viewCountSort;
+        }
+        return b.secondsDuration - a.secondsDuration;
     });
     videoList.forEach(v => {
         v.count = counter.GetCount(v.id);
@@ -40,6 +44,7 @@ function loadVideo(video) {
                         <div class='col' style='flex-grow:2'>\
                             <div class='col-12'>\
                                 <div>" + video.count + " - " + video.snippet.title + "</div>\
+                                <div>" + video.humanReadableDuration + "</div>\
                                 <div style='width: 100%;max-height: 30px;whitespace:wrap;font-size:10px;font-style:italic;overflow:hidden;'>" + video.snippet.description + "</div>\
                             </div>\
                         </div>\

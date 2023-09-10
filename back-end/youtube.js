@@ -1,6 +1,7 @@
 const {google} = require('googleapis');
 const fs = require("fs");
 const { channel } = require('diagnostics_channel');
+const utilities = require('./utilities');
 
 // Each API may support multiple versions. With this sample, we're getting
 // v3 of the blogger API, and using an API key to authenticate.
@@ -145,7 +146,9 @@ async function getVideoDetails(videoIdList) {
             var channels = await GetChannelInfo(uniqueChannelIds);
             results.forEach(r => {
                 r.snippet.thumbnails = formatThumbnails(r.snippet.thumbnails);
-                r.channel = channels.find(c => c.id == r.snippet.channelId)
+                r.channel = channels.find(c => c.id == r.snippet.channelId);
+                r.humanReadableDuration = utilities.ConvertISO8601ToHumanReadableDuration(r.contentDetails.duration);
+                r.secondsDuration = utilities.ConvertISO8601ToSeconds(r.contentDetails.duration);
             });
             break;
         }
